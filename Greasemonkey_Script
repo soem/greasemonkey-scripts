@@ -1,0 +1,32 @@
+// ==UserScript==
+// @name          Apple Daily HTML5 video
+// @namespace     http://soem
+// @description   Apple Daily HTML5 video
+// @match         http://www.appledaily.com.tw/appledaily/article/*
+// @match         http://www.appledaily.com.tw/realtimenews/article/*
+// @grant         none
+// ==/UserScript==
+
+if ( document.location.href.indexOf('realtimenews') > -1 ) {
+    var video_div = document.getElementById('playerVideo');
+    var flash_script = video_div.getElementsByTagName('script')[0].firstChild;
+    var video_src = flash_script.wholeText.match(/http.*mp4/g)[0];
+} else {
+    var video_div = document.getElementsByClassName('mediabox')[0];
+    var flash_script = video_div.getElementsByTagName('script')[0].firstChild;
+    var video_src = flash_script.wholeText.match(/http.*mp4/g)[0];
+}
+
+
+while (video_div.hasChildNodes()) {
+    video_div.removeChild(video_div.firstChild);
+}
+
+video = document.createElement("video");
+video_div.appendChild(video);
+
+video.src = video_src;
+video.autoPlay = false;
+video.type = "video/mp4";
+video.preload = true;
+video.controls = true;
