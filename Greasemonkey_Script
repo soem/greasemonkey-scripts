@@ -9,13 +9,11 @@
 
 if ( document.location.href.indexOf('realtimenews') > -1 ) {
     var video_div = document.getElementById('playerVideo');
-    var flash_script = video_div.getElementsByTagName('script')[0].firstChild;
-    var video_src = flash_script.wholeText.match(/http.*mp4/g)[0];
 } else {
     var video_div = document.getElementsByClassName('mediabox')[0];
-    var flash_script = video_div.getElementsByTagName('script')[0].firstChild;
-    var video_src = flash_script.wholeText.match(/http.*mp4/g)[0];
 }
+var flash_script = video_div.getElementsByTagName('script')[0].firstChild;
+var video_src = flash_script.wholeText.match(/http.*mp4/g)[0];
 
 
 while (video_div.hasChildNodes()) {
