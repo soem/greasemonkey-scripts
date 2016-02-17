@@ -4,10 +4,12 @@
 // @description   Apple Daily HTML5 video
 // @match         http://www.appledaily.com.tw/appledaily/article/*
 // @match         http://www.appledaily.com.tw/realtimenews/article/*
+// @match         http://www.appledaily.com.tw/animation/appledaily/*
 // @grant         none
 // ==/UserScript==
 
-if ( document.location.href.indexOf('realtimenews') > -1 ) {
+if ( document.location.href.indexOf('animation') > -1 ||
+     document.location.href.indexOf('realtimenews') > -1   ) {
     var video_div = document.getElementById('playerVideo');
 } else {
     var video_div = document.getElementsByClassName('mediabox')[0];
