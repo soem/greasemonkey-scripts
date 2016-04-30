@@ -9,27 +9,29 @@
 // @grant         none
 // ==/UserScript==
 
-var video_div, flash_script;
-if ( document.location.href.indexOf('appledaily/article') > -1 ) {
-    video_div = document.getElementsByClassName('mediabox')[0];
-    flash_script = video_div.getElementsByTagName('script')[0].firstChild;
-} else if ( document.location.href.indexOf('infographicarticle') > -1 ) {
-    video_div = document.getElementsByClassName('mediabox')[0];
-    flash_script = document.getElementById('videobox').getElementsByTagName('script')[2].firstChild;
+var url = document.location.href;
+var selector;
+if (url.indexOf('appledaily/article') > -1 ) {
+  selector = '.mediabox > script';
+} else if (url.indexOf('infographicarticle') > -1 ) {
+  selector = '#videobox > script:nth-of-type(3)';
 } else {
-    video_div = document.getElementById('playerVideo');
-    flash_script = video_div.getElementsByTagName('script')[0].firstChild;
+  selector = '#playerVideo > script';
 }
-var video_src = flash_script.wholeText.match(/http.*mp4/g)[0];
 
-video = document.createElement("video");
-video.src = video_src;
-video.autoPlay = false;
-video.type = "video/mp4";
-video.preload = true;
-video.controls = true;
+var flashScript = document.querySelector(selector);
+if (flashScript) {
+  var videoSrc = flashScript.innerHTML.match(/http.*mp4/)[0];
+  var video = document.createElement("video");
+  video.src = videoSrc;
+  video.autoPlay = false;
+  video.type = "video/mp4";
+  video.preload = true;
+  video.controls = true;
 
-while (video_div.hasChildNodes()) {
-    video_div.removeChild(video_div.firstChild);
+  var videoDiv = flashScript.parentNode;
+  while (videoDiv.hasChildNodes()) {
+    videoDiv.removeChild(videoDiv.firstChild);
+  }
+  videoDiv.appendChild(video);
 }
-video_div.appendChild(video);
