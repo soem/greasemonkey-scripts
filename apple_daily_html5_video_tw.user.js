@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name          Apple Daily HTML5 video TW
-// @namespace     http://soem
+// @namespace     https://github.com/soem/greasemonkey-scripts
 // @description   Apple Daily HTML5 video TW
 // @match         http://www.appledaily.com.tw/appledaily/article/*
 // @match         http://*.appledaily.com.tw/realtimenews/article/*
